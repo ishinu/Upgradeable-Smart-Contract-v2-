@@ -6,18 +6,17 @@ import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 
 
-contract HelloOz is OwnableUpgradeable, UUPSUpgradeable{
+contract HelloOzV2 is OwnableUpgradeable, UUPSUpgradeable{
     string public name;
     uint256 public dec;
     uint256 public inc;
     using SafeMath for uint256;
 
-    function initialize(string memory _name) initializer public {
-        name = _name;
-        __Ownable_init();
-    }
-
     function _authorizeUpgrade(address) internal override onlyOwner {}
+
+    function changeName(string memory _name) public{
+        name = _name;
+    }
 
     function decrement(uint256 x) public returns (uint256) {
         return dec = x.sub(1);
